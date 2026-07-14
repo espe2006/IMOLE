@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOLÈ </title>
-    
+    <title>IMOLÈ</title>
     
     <!-- Polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,7 +81,7 @@
     <header class="py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
             
-            <!-- BLOC LOGO RECRÉÉ SELON L'IMAGE -->
+            <!-- BLOC LOGO RECRÉÉ AVEC NOM EN HAUT ET SLOGAN EN BAS -->
             <div class="flex items-center gap-4 group cursor-pointer">
                 <!-- Icone Phare -->
                 <div class="w-12 h-12 relative">
@@ -102,8 +101,11 @@
                 <!-- Barre Dorée Verticale -->
                 <div class="h-10 w-[1.5px] bg-[#e5c167]"></div>
                 
-                <!-- Texte IMOLÈ -->
-                <span class="text-2xl md:text-3xl font-semibold logo-text-style text-white tracking-widest">IMOLÈ </span>
+                <!-- Bloc de texte empilé (Nom en haut, Slogan en bas) -->
+                <div class="flex flex-col justify-center">
+                    <span class="text-2xl md:text-3xl font-semibold logo-text-style text-white tracking-widest leading-none">IMOLÈ</span>
+                    <span class="text-[8px] md:text-[9px] text-[#e5c167] tracking-[0.18em] uppercase font-bold mt-1.5 whitespace-nowrap">Clarté • Innovation • Impact</span>
+                </div>
             </div>
 
             <nav class="hidden md:flex gap-8 text-sm font-medium items-center uppercase tracking-widest">
@@ -122,8 +124,8 @@
             <div class="z-10">
                 <div id="hero-badge" class="inline-flex items-center gap-2 border border-gold/30 bg-gold/10 px-4 py-1.5 rounded-full mb-8">
                     <span class="w-1.5 h-1.5 bg-gold rounded-full"></span>
-                    <span class="text-gold text-[10px] font-bold tracking-[0.2em] uppercase"></span>
-                </div>IMOLè — CLARTÉ · INNOVATION · IMPACT
+                    <span class="text-gold text-[10px] font-bold tracking-[0.2em] uppercase">IMOLÈ — CLARTÉ · INNOVATION · IMPACT</span>
+                </div>
                 <h1 id="hero-title" class="text-white text-5xl md:text-7xl font-bold leading-[1.1] mb-8">
                     Mettez à la lumière <br> de tous <br>
                     <span class="text-gold">votre potentiel.</span>
@@ -147,118 +149,87 @@
         </div>
     </section>
 
-
-
     <!-- ================= SERVICES (LES 6 EXPERTISES) ================= -->
     <section class="py-24" id="services">
         <div class="container mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-20 reveal">
-                <span class="text-gold font-bold uppercase tracking-widest text-sm">Expertises IMOLè</span>
+                <span class="text-gold font-bold uppercase tracking-widest text-sm">Expertises IMOLÈ</span>
                 <h2 class="text-5xl font-bold mt-4">Solutions à 360°</h2>
-                <p class="text-gray-400 mt-6 text-lg">Nous couvrons l'intégralité de vos besoins numériques avec
-                    précision et exigence.</p>
+                <p class="text-gray-400 mt-6 text-lg">Nous couvrons l'intégralité de vos besoins numériques avec précision et exigence.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
                 <!-- 01 Web & App -->
-                <div
-                    class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
+                <div class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
                     <div class="text-gold group-hover:text-black mb-6">
-                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path d="M8 16l-4-4 4-4m8 8l4-4-4-4m-2-12l-4 20" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 group-hover:text-black">Web & Applications</h3>
-                    <p class="text-gray-400 group-hover:text-black/80">Conception de sites et d'applications sur-mesure,
-                        performants et centrés sur l'expérience utilisateur (UX).</p>
+                    <p class="text-gray-400 group-hover:text-black/80">Conception de sites et d'applications sur-mesure, performants et centrés sur l'expérience utilisateur (UX).</p>
                 </div>
 
                 <!-- 02 Logiciels de gestion -->
-                <div
-                    class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
+                <div class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
                     <div class="text-gold group-hover:text-black mb-6">
-                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <rect x="3" y="3" width="18" height="18" rx="2" />
                             <path d="M9 3v18m6-18v18M3 9h18M3 15h18" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 group-hover:text-black">Logiciels de Gestion</h3>
-                    <p class="text-gray-400 group-hover:text-black/80">Développement d'outils ERP et CRM personnalisés
-                        pour optimiser vos flux de travail et votre productivité.</p>
+                    <p class="text-gray-400 group-hover:text-black/80">Développement d'outils ERP et CRM personnalisés pour optimiser vos flux de travail et votre productivité.</p>
                 </div>
 
                 <!-- 03 Réseaux Informatiques -->
-                <div
-                    class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
+                <div class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
                     <div class="text-gold group-hover:text-black mb-6">
-                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M5 12h14M5 12a2 2 0 100-4 2 2 0 000 4zm14 0a2 2 0 100-4 2 2 0 000 4zm-7 8a2 2 0 100-4 2 2 0 000 4zM12 8V4" />
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path d="M5 12h14M5 12a2 2 0 100-4 2 2 0 000 4zm14 0a2 2 0 100-4 2 2 0 000 4zm-7 8a2 2 0 100-4 2 2 0 000 4zM12 8V4" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 group-hover:text-black">Infrastructures Réseaux</h3>
-                    <p class="text-gray-400 group-hover:text-black/80">Installation, configuration et maintenance de
-                        réseaux informatiques robustes pour une connectivité totale.</p>
+                    <p class="text-gray-400 group-hover:text-black/80">Installation, configuration et maintenance de réseaux informatiques robustes pour une connectivité totale.</p>
                 </div>
 
                 <!-- 04 Cybersécurité -->
-                <div
-                    class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
+                <div class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
                     <div class="text-gold group-hover:text-black mb-6">
-                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM12 8v4m0 4h.01" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 group-hover:text-black">Audit Cybersécurité</h3>
-                    <p class="text-gray-400 group-hover:text-black/80">Diagnostic complet de vos vulnérabilités et mise
-                        en place de protocoles de défense pour protéger vos données.</p>
+                    <p class="text-gray-400 group-hover:text-black/80">Diagnostic complet de vos vulnérabilités et mise en place de protocoles de défense pour protéger vos données.</p>
                 </div>
 
                 <!-- 05 Marketing & RS -->
-                <div
-                    class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
+                <div class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
                     <div class="text-gold group-hover:text-black mb-6">
-                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M11 5h2M11 9h2M11 13h2M11 17h2M7 5h2M7 9h2M7 13h2M7 17h2M15 5h2M15 9h2M15 13h2M15 17h2" />
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path d="M11 5h2M11 9h2M11 13h2M11 17h2M7 5h2M7 9h2M7 13h2M7 17h2M15 5h2M15 9h2M15 13h2M15 17h2" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 group-hover:text-black">Marketing & Réseaux Sociaux</h3>
-                    <p class="text-gray-400 group-hover:text-black/80">Stratégie digitale, création de contenu et
-                        gestion de communauté pour booster votre influence et vos ventes.</p>
+                    <p class="text-gray-400 group-hover:text-black/80">Stratégie digitale, création de contenu et gestion de communauté pour booster votre influence et vos ventes.</p>
                 </div>
 
                 <!-- 06 Business Plan -->
-                <div
-                    class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
+                <div class="reveal service-card bg-white/5 p-10 rounded-2xl border border-white/5 group hover:bg-[#e5c167]">
                     <div class="text-gold group-hover:text-black mb-6">
-                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 group-hover:text-black">Business Plan & Conseil</h3>
-                    <p class="text-gray-400 group-hover:text-black/80">Élaboration de modèles économiques solides et
-                        accompagnement stratégique pour vos futurs projets.</p>
+                    <p class="text-gray-400 group-hover:text-black/80">Élaboration de modèles économiques solides et accompagnement stratégique pour vos futurs projets.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-
-
-    
-
-
- <!-- ================= STATS & EVOLUTION ================= -->
+    <!-- ================= STATS & EVOLUTION ================= -->
     <section class="py-24 bg-navy/30 relative" id="surnous">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
@@ -307,16 +278,7 @@
         </div>
     </section>
 
-
-    <!-- ================= FOOTER ================= -->
-
-
-    
-
-
-
-
-
+    <!-- Style Override Local -->
     <style>
         :root {
             --gold: #C8A96A;
@@ -337,13 +299,10 @@
         }
 
         @keyframes pulse-gold {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: scale(1);
                 opacity: 0.8;
             }
-
             50% {
                 transform: scale(1.1);
                 opacity: 1;
@@ -365,8 +324,6 @@
         }
     </style>
 
-
-
     <!-- ================= À PROPOS ================= -->
     <section id="nousconcernant" class="py-32 bg-white/5">
         <div class="container mx-auto px-6">
@@ -374,13 +331,11 @@
                 <div class="reveal">
                     <h2 class="text-4xl font-bold mb-8">L'excellence au service de l'innovation.</h2>
                     <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                        IMOLè n'est pas seulement une agence, c'est un partenaire de croissance. Nous croyons que chaque
-                        organisation possède un potentiel qui ne demande qu'à être révélé par les bons outils
-                        technologiques.
+                        IMOLÈ n'est pas seulement une agence, c'est un partenaire de croissance. Nous croyons que chaque
+                        organisation possède un potentiel qui ne demande qu'à être révélé par les bons outils technologiques.
                     </p>
                     <p class="text-gray-400 text-lg leading-relaxed">
-                        Notre approche repose sur la clarté, l'agilité et un engagement total envers la sécurité de vos
-                        infrastructures.
+                        Notre approche repose sur la clarté, l'agilité et un engagement total envers la sécurité de vos infrastructures.
                     </p>
                 </div>
                 <div class="reveal grid grid-cols-2 gap-4">
@@ -404,12 +359,11 @@
 
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-                
                 <!-- Brand -->
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center text-black font-bold">I</div>
-                        <span class="text-2xl font-bold tracking-tighter uppercase">IMOLè</span>
+                        <span class="text-2xl font-bold tracking-tighter uppercase">IMOLÈ</span>
                     </div>
                     <p class="text-gray-500 text-sm leading-relaxed mb-8">
                         L'excellence numérique au service de votre ambition. Nous éclairons le chemin de votre transformation.
@@ -465,7 +419,7 @@
             <!-- Bottom -->
             <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
                 <p class="text-gray-600 text-[11px] uppercase tracking-widest font-medium">
-                    © 2024 IMOLè — CLARTÉ · INNOVATION · IMPACT
+                    © 2026 IMOLÈ — CLARTÉ · INNOVATION · IMPACT
                 </p>
                 <div class="flex items-center gap-6 text-[10px] text-gray-500 uppercase tracking-widest">
                     <a href="#" class="hover:text-gold">Mentions Légales</a>
@@ -522,5 +476,4 @@
     </script>
     
 </body>
-
 </html>
