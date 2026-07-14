@@ -1,0 +1,15 @@
+/* Prépare la courbe pour l'animation GSAP */
+.stats-path {
+    stroke-dasharray: 1000; 
+    stroke-dashoffset: 1000;
+    opacity: 0; /* Caché par défaut */
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    transition: opacity 0.5s ease; /* Apparition fluide au début */
+}
+
+/* Classe utilitaire pour les compteurs si besoin */
+.counter {
+    display: inline-block;
+    min-width: 1.2em; /* Évite les sauts de texte pendant l'augmentation */
+}
