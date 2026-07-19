@@ -1,331 +1,990 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOLÈ — Conseil en Transformation Digitale</title>
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMOLÈ — Agence de Solutions Digitales & Cybersécurité</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0F4C75;
-            --secondary: #2BB673;
-            --accent: #FF7A59;
-            --bg: #FAFBFC;
-            --text: #101820;
-            --gray-light: #F3F4F6;
-            --gray-text: #6B7280;
-            --white: #FFFFFF;
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS Play CDN for instant layout rendering & configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              imole: {
+                navy: '#0A1D37',
+                blue: '#3B82F6',
+                green: '#10B981',
+                gold: '#D4AF37',
+                light: '#F8FAFC',
+                dark: '#051329',
+                gray: '#94A3B8',
+                card: '#112543'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
         }
+      }
+    </script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="bg-[#051329] text-[#F8FAFC] font-sans antialiased selection:bg-[#D4AF37] selection:text-slate-900">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Backdrops decorative glows -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-[10%] -left-[20%] w-[60%] h-[50%] rounded-full glow-bg-blue opacity-50"></div>
+      <div class="absolute top-[40%] -right-[20%] w-[50%] h-[60%] rounded-full glow-bg-gold opacity-30"></div>
+    </div>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
+    <!-- --- HEADER / NAVIGATION --- -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-4 px-6 md:px-12 bg-transparent">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#accueil" class="flex items-center space-x-2.5 group">
+          <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-yellow-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/10 group-hover:scale-105 transition-all">
+            <span class="text-slate-950 font-black font-mono text-xl tracking-tighter">IM</span>
+          </div>
+          <div>
+            <span class="text-lg font-extrabold tracking-tight text-white group-hover:text-imole-gold transition-colors">IMOLÈ</span>
+            <span class="block text-[9px] uppercase tracking-wider text-amber-500 font-mono leading-none">Cotonou, Bénin</span>
+          </div>
+        </a>
 
-        h1, h2, h3 {
-            font-weight: 600;
-            color: var(--primary);
-        }
+        <!-- Desktop Navigation links -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#accueil" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">Accueil</a>
+          <a href="#services" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">Services</a>
+          <a href="#configurateur" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">Configurateur</a>
+          <a href="#sla" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">SLA</a>
+          <a href="#propos" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">À Propos</a>
+          <a href="#faq" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">FAQ</a>
+          <a href="#contact" class="nav-link text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-imole-gold transition-colors">Contact</a>
+        </nav>
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        header {
-            background-color: var(--white);
-            border-bottom: 1px solid var(--gray-light);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-
-        header.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        nav a {
-            color: var(--text);
-            text-decoration: none;
-            margin-left: 32px;
-            font-weight: 500;
-            font-size: 15px;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        .hero {
-            padding: 96px 0;
-            background: linear-gradient(135deg, #FFFFFF 0%, #F0F4F8 100%);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: 46px;
-            line-height: 1.2;
-            margin-bottom: 24px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: var(--gray-text);
-            margin-bottom: 36px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 16px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.2s;
-            font-size: 15px;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: var(--white);
-            box-shadow: 0 4px 14px rgba(255, 122, 89, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: #e56544;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(15, 76, 117, 0.05);
-        }
-
-        .hero-visual {
-            background-color: var(--primary);
-            border-radius: 16px;
-            height: 380px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            box-shadow: 0 20px 40px rgba(15, 76, 117, 0.15);
-        }
-
-        .hero-visual span {
-            font-style: italic;
-            font-size: 24px;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        section.content-section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 56px auto;
-        }
-
-        .section-header h2 {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .card {
-            background-color: var(--white);
-            padding: 32px;
-            border-radius: 12px;
-            border: 1px solid var(--gray-light);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background-color: rgba(43, 182, 115, 0.1);
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            font-weight: bold;
-        }
-
-        .contact-box {
-            background-color: var(--primary);
-            color: var(--white);
-            border-radius: 16px;
-            padding: 56px;
-            text-align: center;
-        }
-
-        .contact-box h2 {
-            color: var(--white);
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .contact-box p {
-            margin-bottom: 32px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        footer {
-            background-color: #0A0F18;
-            color: rgba(255, 255, 255, 0.6);
-            padding: 48px 0;
-        }
-
-        .footer-grid {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        @media (max-width: 768px) {
-            .hero-grid, .grid-3 { grid-template-columns: 1fr; }
-            .nav-container { flex-direction: column; height: auto; padding: 16px 0; gap: 12px; }
-            nav a { margin: 0 12px; }
-        }
-    </style>
-</head>
-<body>
-
-    <header id="header">
-        <div class="container nav-container">
-            <a href="#" class="logo">IMOLÈ</a>
-            <nav>
-                <a href="#services">Services</a>
-                <a href="#valeurs">Valeurs</a>
-                <a href="#contact">Contact</a>
-            </nav>
+        <!-- CTA Header Action -->
+        <div class="hidden md:flex items-center">
+          <button id="header-audit-btn" class="request-audit-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-imole-gold/40 text-white font-bold text-xs py-2.5 px-5 rounded-xl transition-all cursor-pointer shadow-md">
+            Demander un Audit
+          </button>
         </div>
+
+        <!-- Mobile Menu trigger -->
+        <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-1 rounded-lg focus:outline-none cursor-pointer" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-950/95 border-b border-slate-900 py-6 px-6 space-y-4">
+        <a href="#accueil" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold">Accueil</a>
+        <a href="#services" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold">Services</a>
+        <a href="#configurateur" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold">Configurateur</a>
+        <a href="#sla" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold">SLA</a>
+        <a href="#propos" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold">À Propos</a>
+        <a href="#faq" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold">FAQ</a>
+        <a href="#contact" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-imole-gold pb-2">Contact</a>
+        <button class="request-audit-btn w-full bg-imole-gold text-slate-950 font-bold text-xs py-3 rounded-xl transition-all cursor-pointer">
+          Demander un Audit Gratuit
+        </button>
+      </div>
     </header>
 
-    <section class="hero">
-        <div class="container hero-grid">
+    <!-- --- HERO SECTION --- -->
+    <section id="accueil" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 md:px-12 z-10 overflow-hidden">
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Hero Text content -->
+        <div class="lg:col-span-7 space-y-6 text-left">
+          <!-- Sparkle notification badge -->
+          <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500/10 to-amber-500/2 bg-amber-500/10 border border-amber-500/30 rounded-full px-4 py-1.5 shadow-md shadow-amber-500/5">
+            <span class="flex h-2 w-2 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+            </span>
+            <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-amber-500 font-mono">
+              Expertise Locale, Standards Internationaux
+            </span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-none">
+            L'excellence technologique <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600">sans compromis.</span>
+          </h1>
+          <p class="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
+            IMOLÈ est une agence de services numériques d'élite basée à Cotonou. Nous concevons vos sites, auditons votre cybersécurité et pilotons votre croissance digitale avec des tarifs ultra-compétitifs et transparents.
+          </p>
+
+          <!-- CTAs buttons -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+            <button class="request-audit-btn bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-extrabold text-xs py-3.5 px-8 rounded-xl transition-all shadow-lg hover:shadow-amber-500/10 cursor-pointer flex items-center justify-center space-x-2">
+              <span>Demander mon Audit Gratuit</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </button>
+            <a href="#configurateur" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 font-bold text-xs py-3.5 px-8 rounded-xl transition-all text-center cursor-pointer shadow-md">
+              Simuler nos tarifs
+            </a>
+          </div>
+
+          <!-- Highlight credentials -->
+          <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-900 max-w-md">
             <div>
-                <h1>IMOLÈ — Solutions digitales pour accélérer votre croissance.</h1>
-                <p>Conception web, ERP/CRM, sécurité et stratégie digitale — un partenaire technique pour transformer vos idées en résultats mesurables.</p>
-                <div class="btn-group">
-                    <a href="#contact" class="btn btn-primary">Demander un audit gratuit</a>
-                    <a href="#services" class="btn btn-secondary">Voir nos solutions</a>
-                </div>
+              <span class="block text-2xl font-extrabold text-white font-mono">100%</span>
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Afrique de l'Ouest</span>
             </div>
-            <div class="hero-visual">
-                <span>« La clarté qui fait avancer votre entreprise. »</span>
+            <div>
+              <span class="block text-2xl font-extrabold text-imole-gold font-mono">&lt; 100k</span>
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Tarifs par prestation FCFA</span>
             </div>
+            <div>
+              <span class="block text-2xl font-extrabold text-white font-mono">24h</span>
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Délai de réponse garanti</span>
+            </div>
+          </div>
         </div>
+
+        <!-- Floating Abstract UI element -->
+        <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-[420px] bg-slate-900/40 border border-slate-800 rounded-3xl p-6 shadow-2xl backdrop-blur-sm overflow-hidden animate-float">
+            <!-- Decorative dots -->
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+              <div class="flex space-x-1.5">
+                <span class="h-2.5 w-2.5 rounded-full bg-red-500/80"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-yellow-500/80"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-500/80"></span>
+              </div>
+              <span class="text-[10px] font-mono text-slate-500">imole-cotonou.sh</span>
+            </div>
+            
+            <div class="space-y-4 text-xs font-mono">
+              <div class="text-slate-500">$ imole init-agency</div>
+              <div class="text-emerald-400">&gt; Agence IMOLÈ initialisée avec succès !</div>
+              <div class="space-y-1">
+                <div class="text-slate-300"><span class="text-imole-gold">Localisation :</span> Cotonou, Bénin</div>
+                <div class="text-slate-300"><span class="text-imole-gold">Pôles d'activité :</span></div>
+                <div class="text-slate-400 pl-4">• Web & Présence Digitale</div>
+                <div class="text-slate-400 pl-4">• Cybersécurité & Audits Informatiques</div>
+                <div class="text-slate-400 pl-4">• Conseil & Business Plan</div>
+              </div>
+              <div class="text-slate-500">$ check status --sla</div>
+              <div class="text-emerald-400">&gt; SLA : Taux d'engagement de réponse de 24h respecté à 100%.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="services" class="content-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nos Domaines d'Expertise</h2>
-                <p>Une offre transversale pour éliminer la complexité technologique et propulser vos performances business.</p>
-            </div>
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-icon">01</div>
-                    <h3>Stratégie Digitale</h3>
-                    <p>Audit complet de maturité numérique, définition de feuilles de route claires et optimisation complète de vos processus métiers.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">02</div>
-                    <h3>Communication & Visibilité</h3>
-                    <p>Création d'identités visuelles percutantes, stratégies de positionnement de marque et plans d'acquisition de trafic multicanaux.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">03</div>
-                    <h3>Cybersécurité</h3>
-                    <p>Audit des vulnérabilités, protection intégrale des actifs numériques de votre entreprise et formation de vos équipes.</p>
-                </div>
-            </div>
+    <!-- --- SERVICES OVERVIEW SECTION --- -->
+    <section id="services" class="py-24 px-6 md:px-12 bg-slate-950/40 relative z-10 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="text-center max-w-xl mx-auto space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Nos Pôles de Services</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Des compétences d'élite pour votre structure</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Nous couvrons l'ensemble de vos défis numériques avec une rigueur méthodologique éprouvée et des livrables de classe internationale.
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1: Communication & Presence -->
+          <div class="bg-slate-900/60 border border-slate-850 hover:border-imole-gold/40 rounded-3xl p-6 sm:p-8 space-y-6 transition-all duration-300 shadow-lg flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="h-12 w-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center shadow-inner">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover:text-imole-gold transition-colors">Communication & Présence Digitale</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Prenez le contrôle de votre image de marque. Nous créons des sites web d'exception, optimisons votre référencement naturel (SEO) et orchestrons votre visibilité sur les réseaux sociaux.
+              </p>
+            </div>
+            <ul class="space-y-2 text-[11px] text-slate-400 font-mono border-t border-slate-850/60 pt-4 mt-6">
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Conception de sites vitrines & sur-mesure</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Audit & Optimisation SEO local</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Animation des réseaux sociaux</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Campagnes Meta & Google Ads</span></li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Cybersecurite -->
+          <div class="bg-slate-900/60 border border-slate-850 hover:border-imole-gold/40 rounded-3xl p-6 sm:p-8 space-y-6 transition-all duration-300 shadow-lg flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="h-12 w-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-500 flex items-center justify-center shadow-inner">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover:text-imole-gold transition-colors">Cybersécurité & Audit SI</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Sécurisez vos données et protégez vos serveurs contre les menaces. Nous évaluons vos failles, définissons vos politiques d'accès (PSSI) et sensibilisons vos équipes face aux tentatives de piratage.
+              </p>
+            </div>
+            <ul class="space-y-2 text-[11px] text-slate-400 font-mono border-t border-slate-850/60 pt-4 mt-6">
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Audit de vulnérabilité de serveurs</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Élaboration de chartes & PSSI</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Ateliers de sensibilisation anti-phishing</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Sécurisation de réseaux d'entreprise</span></li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Enterprise Development -->
+          <div class="bg-slate-900/60 border border-slate-850 hover:border-imole-gold/40 rounded-3xl p-6 sm:p-8 space-y-6 transition-all duration-300 shadow-lg flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center shadow-inner">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover:text-imole-gold transition-colors">Conseil & Développement d'Entreprise</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Donnez de la structure à votre croissance. Nous rédigeons des business plans convaincants et structurons vos projets complexes selon des méthodologies agiles pour garantir des lancements sans frictions.
+              </p>
+            </div>
+            <ul class="space-y-2 text-[11px] text-slate-400 font-mono border-t border-slate-850/60 pt-4 mt-6">
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Élaboration de business plans bancables</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Gestion & Planification agile de projets</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Études de faisabilité & viabilité</span></li>
+              <li class="flex items-center space-x-2"><span class="text-imole-gold">•</span> <span>Gouvernance opérationnelle</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="content-section">
-        <div class="container">
-            <div class="contact-box">
-                <h2>Éclairons ensemble votre chemin vers la croissance</h2>
-                <p>Prenez rendez-vous dès aujourd'hui pour obtenir votre audit initial gratuit et identifier vos axes prioritaires de performance.</p>
-                <a href="mailto:contact@imole.com" class="btn btn-primary">Contacter notre équipe</a>
-            </div>
+    <!-- --- DYNAMIC CONFIGURATOR SECTION --- -->
+    <section id="configurateur" class="py-24 px-6 md:px-12 relative z-10">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="text-center max-w-xl mx-auto space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Simulateur Tarifaire</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Configurez votre projet en direct</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Pas de coûts cachés ni de mauvaises surprises. Choisissez vos modules et évaluez instantanément le budget et la durée requise.
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- LEFT SIDE: Config Options selectors -->
+          <div class="lg:col-span-7 space-y-8 bg-slate-900/40 border border-slate-850 rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
+            <!-- 1. Category Switcher Tabs -->
+            <div class="space-y-3">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">1. Choisir le pôle d'activité</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button data-category="communication-visibilite" class="service-tab-btn text-left p-3.5 rounded-2xl border transition-all duration-300 text-xs font-bold font-sans cursor-pointer">
+                  Communication & Web
+                </button>
+                <button data-category="cybersecurite" class="service-tab-btn text-left p-3.5 rounded-2xl border transition-all duration-300 text-xs font-bold font-sans cursor-pointer">
+                  Cybersécurité
+                </button>
+                <button data-category="developpement-entreprise" class="service-tab-btn text-left p-3.5 rounded-2xl border transition-all duration-300 text-xs font-bold font-sans cursor-pointer">
+                  Développement & Conseil
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Features options list inside category -->
+            <div class="space-y-4">
+              <div class="flex justify-between items-baseline">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">2. Sélectionner les modules optionnels</h4>
+                <div class="text-[10px] font-mono text-slate-500">
+                  Base incluse : <span id="base-price-label" class="font-bold text-slate-300"></span> • <span id="base-days-label" class="font-bold text-slate-300"></span>
+                </div>
+              </div>
+              <div id="features-list-container" class="space-y-3">
+                <!-- Injected dynamically via JS -->
+              </div>
+            </div>
+
+            <!-- 3. Hosting Tiers option selector -->
+            <div class="space-y-3">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">3. Niveau d'hébergement & infrastructure</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button id="host-basic" data-host="basic" class="text-left p-3 rounded-2xl border transition-all duration-200 text-xs cursor-pointer">
+                  <div class="font-bold">Hébergement Basique</div>
+                  <div class="text-[9px] text-slate-500 font-normal">Inclus • Délai standard</div>
+                </button>
+                <button id="host-ent" data-host="high-availability" class="text-left p-3 rounded-2xl border transition-all duration-200 text-xs cursor-pointer">
+                  <div class="font-bold">Redondé (HA)</div>
+                  <div class="text-[9px] text-slate-500 font-normal">+15 000 FCFA • +3j</div>
+                </button>
+                <button id="host-expert" data-host="enterprise" class="text-left p-3 rounded-2xl border transition-all duration-200 text-xs cursor-pointer">
+                  <div class="font-bold">Entreprise</div>
+                  <div class="text-[9px] text-slate-500 font-normal">+25 000 FCFA • +6j</div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE: Price Result details -->
+          <div class="lg:col-span-5 sticky top-28 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div class="space-y-1">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-imole-gold font-mono">Détails de l'Estimation</h4>
+              <h3 class="text-xl font-extrabold text-white leading-tight">Estimation instantanée</h3>
+              <p class="text-[11px] text-slate-400 leading-normal">
+                Cette simulation fournit un estimatif budgétaire pour un projet standard. Un cahier des charges validé confirmera l'engagement.
+              </p>
+            </div>
+
+            <div class="bg-slate-950/80 rounded-2xl p-5 border border-slate-850/80 space-y-4">
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">Période estimée :</span>
+                <span id="total-days-label" class="text-sm font-bold text-white font-mono"></span>
+              </div>
+              <div class="border-t border-slate-900 pt-3 flex flex-col">
+                <span class="text-xs text-slate-400 mb-1">Budget Total estimé :</span>
+                <span id="total-price-label" class="text-3xl font-black text-imole-gold font-mono tracking-tight animate-pulse"></span>
+              </div>
+            </div>
+
+            <button id="calculator-order-btn" class="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-black text-xs py-3.5 rounded-xl transition-all shadow-md cursor-pointer flex items-center justify-center space-x-2">
+              <span>Demander un Devis basé sur cette Simulation</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </button>
+
+            <div class="flex items-center space-x-2.5 text-[10px] text-slate-500 font-mono">
+              <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              <span>Calculateur sécurisé, conforme aux barèmes West-Africains.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-brand">IMOLÈ</div>
-            <div>&copy; 2026 IMOLÈ. Tous droits réservés.</div>
+    <!-- --- SLA MAINTENANCE SECTION --- -->
+    <section id="sla" class="py-24 px-6 md:px-12 bg-slate-950/40 relative z-10 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="text-center max-w-xl mx-auto space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Maintenance & SLA Tiers</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Sécurité & Disponibilité Garantie</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Nous ne laissons jamais nos clients sans réponse. Choisissez votre niveau d'assistance pour vos applications, plateformes et cybersécurité.
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- SLA Bronze -->
+          <div class="bg-slate-900/60 border border-slate-850 hover:border-imole-gold/20 rounded-3xl p-6 sm:p-8 space-y-6 transition-all duration-300 shadow-md flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">SLA Bronze</span>
+                <span class="text-xs font-mono text-emerald-400 font-semibold">99.5% dispo</span>
+              </div>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-3xl font-extrabold text-white font-mono">15 000 FCFA</span>
+                <span class="text-xs text-slate-500">/mois</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                Idéal pour les sites vitrines et applications secondaires qui requièrent un entretien régulier sans astreinte critique immédiate.
+              </p>
+            </div>
+            <ul class="space-y-3 text-[11px] text-slate-300 font-sans border-t border-slate-850/60 pt-4 mt-6">
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>5j/7, de 9h à 18h</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Réponse sous 24h ouvrées</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Sauvegardes hebdomadaires</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Rapports d'activité mensuels</span></li>
+            </ul>
+          </div>
+
+          <!-- SLA Silver -->
+          <div class="bg-slate-900/60 border border-imole-gold/50 rounded-3xl p-6 sm:p-8 space-y-6 transition-all duration-300 shadow-xl flex flex-col justify-between relative">
+            <span class="absolute -top-3 right-6 bg-imole-gold text-slate-950 text-[10px] font-bold font-mono px-3 py-1 rounded-full uppercase shadow">Recommandé</span>
+            <div class="space-y-4">
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-bold text-imole-gold uppercase tracking-wider font-mono">SLA Silver</span>
+                <span class="text-xs font-mono text-emerald-400 font-semibold">99.9% dispo</span>
+              </div>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-3xl font-extrabold text-white font-mono">45 000 FCFA</span>
+                <span class="text-xs text-slate-500">/mois</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                Parfait pour les plateformes e-commerce actives et applications d'entreprise stratégiques en Afrique de l'Ouest.
+              </p>
+            </div>
+            <ul class="space-y-3 text-[11px] text-slate-300 font-sans border-t border-slate-850/60 pt-4 mt-6">
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>5j/7, de 8h à 19h</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Sous 4h (Intervention critique)</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Sauvegardes quotidiennes</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Supervision proactive (Monitoring)</span></li>
+            </ul>
+          </div>
+
+          <!-- SLA Gold -->
+          <div class="bg-slate-900/60 border border-slate-850 hover:border-imole-gold/20 rounded-3xl p-6 sm:p-8 space-y-6 transition-all duration-300 shadow-md flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">SLA Gold</span>
+                <span class="text-xs font-mono text-emerald-400 font-semibold">99.99% dispo</span>
+              </div>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-3xl font-extrabold text-white font-mono">90 000 FCFA</span>
+                <span class="text-xs text-slate-500">/mois</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                Niveau d'exigence maximal avec une astreinte permanente. Adapté aux systèmes bancaires et infrastructures critiques.
+              </p>
+            </div>
+            <ul class="space-y-3 text-[11px] text-slate-300 font-sans border-t border-slate-850/60 pt-4 mt-6">
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>7j/7, 24h/24 (Astreinte continue)</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Garantie de Temps de Rétablissement (2h)</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Sauvegardes en continu redondées</span></li>
+              <li class="flex items-center space-x-2"><svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> <span>Responsable Technique Dédié</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- WORK METHOD / PROCESS SECTION --- -->
+    <section class="py-24 px-6 md:px-12 relative z-10 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="text-center max-w-xl mx-auto space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Notre Méthode de Travail</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Rigueur Agile & Excellence</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Nous structurons chaque projet pour garantir que vos livrables soient irréprochables et performants dans des délais optimisés.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <!-- Step 1 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-4 relative">
+            <span class="text-4xl font-black text-slate-800 font-mono absolute top-4 right-6">01</span>
+            <div class="h-10 w-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-sm">
+              I
+            </div>
+            <h4 class="text-lg font-bold text-white">Brief & Cadrage</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Nous démarrons par une phase d'écoute attentive pour définir vos besoins réels. Notre équipe de Cotonou élabore un cahier des charges rigoureux et complet sous 48h.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-4 relative">
+            <span class="text-4xl font-black text-slate-800 font-mono absolute top-4 right-6">02</span>
+            <div class="h-10 w-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-500 flex items-center justify-center font-bold text-sm">
+              II
+            </div>
+            <h4 class="text-lg font-bold text-white">Développement & Tests</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Nous appliquons des méthodes de développement agiles avec des revues régulières. Vos livrables sont soumis à des séries intensives de tests d'assurance qualité et d'audits de vulnérabilité.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-4 relative">
+            <span class="text-4xl font-black text-slate-800 font-mono absolute top-4 right-6">03</span>
+            <div class="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center font-bold text-sm">
+              III
+            </div>
+            <h4 class="text-lg font-bold text-white">Livraison & Suivi SLA</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Vos plateformes sont déployées en toute sécurité. Notre maintenance SLA prend le relais pour assurer une surveillance permanente de vos infrastructures critiques.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- ABOUT US (A PROPOS) SECTION --- -->
+    <section id="propos" class="py-24 px-6 md:px-12 bg-slate-950/40 relative z-10 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Content Column -->
+        <div class="lg:col-span-6 space-y-6 text-left">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Qui Sommes-Nous ?</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Une force technique basée à Cotonou</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            IMOLÈ est née d'une vision simple : offrir aux entreprises ouest-africaines et internationales des solutions digitales d'élite, à forte valeur technologique, sans imposer de barrières budgétaires extravagantes.
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Grâce à notre implantation locale à Cotonou au Bénin, nous mobilisons des architectes logiciels, designers et experts en cybersécurité talentueux pour accompagner votre structure au quotidien avec réactivité et dévouement.
+          </p>
+          
+          <div class="grid grid-cols-2 gap-6 pt-4">
+            <div class="space-y-1">
+              <span class="block text-xl font-bold text-white">Nos Valeurs</span>
+              <p class="text-[11px] text-slate-400 leading-normal">Intégrité, transparence, rigueur d'ingénierie absolue.</p>
+            </div>
+            <div class="space-y-1">
+              <span class="block text-xl font-bold text-white">Notre Mission</span>
+              <p class="text-[11px] text-slate-400 leading-normal">Démocratiser la sécurité et l'innovation technologique.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Display Box (Sleek minimalist representation) -->
+        <div class="lg:col-span-6">
+          <div class="bg-slate-900/50 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Notre Équipe de Direction</h4>
+            <div class="space-y-4">
+              <!-- QA -->
+              <div class="flex items-center space-x-4 bg-slate-950/40 border border-slate-850/60 p-3.5 rounded-2xl">
+                <div class="h-11 w-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 font-bold font-mono text-sm shadow-inner">QA</div>
+                <div>
+                  <h5 class="text-xs font-bold text-white leading-snug">QUENUM Ashley</h5>
+                  <p class="text-[10px] text-slate-400 leading-none">Directrice d'agence • Associée</p>
+                </div>
+              </div>
+              <!-- TE -->
+              <div class="flex items-center space-x-4 bg-slate-950/40 border border-slate-850/60 p-3.5 rounded-2xl">
+                <div class="h-11 w-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 font-bold font-mono text-sm shadow-inner">TE</div>
+                <div>
+                  <h5 class="text-xs font-bold text-white leading-snug">TCHIBOZO Espérancia</h5>
+                  <p class="text-[10px] text-slate-400 leading-none">Responsable technique Sécurité</p>
+                </div>
+              </div>
+              <!-- BS -->
+              <div class="flex items-center space-x-4 bg-slate-950/40 border border-slate-850/60 p-3.5 rounded-2xl">
+                <div class="h-11 w-11 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 font-bold font-mono text-sm shadow-inner">BS</div>
+                <div>
+                  <h5 class="text-xs font-bold text-white leading-snug">BADA Stacy</h5>
+                  <p class="text-[10px] text-slate-400 leading-none">Responsable Administrative & Financière</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- FAQs ACCORDIONS SECTION --- -->
+    <section id="faq" class="py-24 px-6 md:px-12 relative z-10 border-t border-slate-900">
+      <div class="max-w-4xl mx-auto space-y-16">
+        <div class="text-center space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Foire Aux Questions</h2>
+          <h3 class="text-3xl font-extrabold text-white tracking-tight">Questions les plus fréquentes</h3>
+          <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+            Retrouvez les réponses à vos interrogations concernant nos services, notre accompagnement et nos tarifs.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Accordion 1 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-2xl overflow-hidden transition-all duration-200">
+            <button class="faq-accordion-btn w-full text-left p-5 flex items-center justify-between text-xs sm:text-sm font-bold text-white cursor-pointer hover:bg-slate-900/60">
+              <span>Pourquoi vos tarifs sont-ils tous inférieurs à 100 000 FCFA ?</span>
+              <span class="faq-arrow-down text-imole-gold font-mono">&darr;</span>
+              <span class="faq-arrow-up hidden text-imole-gold font-mono">&uarr;</span>
+            </button>
+            <div class="hidden p-5 border-t border-slate-850/60 bg-slate-950/40 text-xs text-slate-300 leading-relaxed">
+              Nous croyons à une démocratisation réelle de l'ingénierie et du digital en Afrique de l'Ouest. Grâce à une structure opérationnelle optimisée, l'absence d'intermédiaires onéreux et notre équipe implantée à Cotonou, nous pouvons maintenir une excellente rentabilité tout en proposant des prix justes et accessibles pour les PME et startups locales.
+            </div>
+          </div>
+
+          <!-- Accordion 2 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-2xl overflow-hidden transition-all duration-200">
+            <button class="faq-accordion-btn w-full text-left p-5 flex items-center justify-between text-xs sm:text-sm font-bold text-white cursor-pointer hover:bg-slate-900/60">
+              <span>Comment fonctionne le service d'Audit Gratuit ?</span>
+              <span class="faq-arrow-down text-imole-gold font-mono">&darr;</span>
+              <span class="faq-arrow-up hidden text-imole-gold font-mono">&uarr;</span>
+            </button>
+            <div class="hidden p-5 border-t border-slate-850/60 bg-slate-950/40 text-xs text-slate-300 leading-relaxed">
+              Notre audit gratuit consiste en une évaluation préliminaire de 30 minutes de votre présence digitale ou de votre sécurité informatique (sites existants, configurations serveurs). À la suite de cet échange avec l'un de nos experts à Cotonou, nous vous remettons un rapport de synthèse listant les optimisations prioritaires.
+            </div>
+          </div>
+
+          <!-- Accordion 3 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-2xl overflow-hidden transition-all duration-200">
+            <button class="faq-accordion-btn w-full text-left p-5 flex items-center justify-between text-xs sm:text-sm font-bold text-white cursor-pointer hover:bg-slate-900/60">
+              <span>Quel est votre délai d'intervention en cas d'incident ?</span>
+              <span class="faq-arrow-down text-imole-gold font-mono">&darr;</span>
+              <span class="faq-arrow-up hidden text-imole-gold font-mono">&uarr;</span>
+            </button>
+            <div class="hidden p-5 border-t border-slate-850/60 bg-slate-950/40 text-xs text-slate-300 leading-relaxed">
+              Nos délais sont strictement définis par nos contrats de maintenance (SLA). En formule Bronze, nous traitons vos demandes sous 24 heures ouvrées. En formule Silver, ce délai passe à 4 heures maximum. Pour la formule Gold (critique), nous garantissons un rétablissement complet de vos services sous 2 heures (GTR), avec une assistance 24h/24 et 7j/7.
+            </div>
+          </div>
+
+          <!-- Accordion 4 -->
+          <div class="bg-slate-900/40 border border-slate-850 rounded-2xl overflow-hidden transition-all duration-200">
+            <button class="faq-accordion-btn w-full text-left p-5 flex items-center justify-between text-xs sm:text-sm font-bold text-white cursor-pointer hover:bg-slate-900/60">
+              <span>Puis-je changer de forfait de maintenance (SLA) à tout moment ?</span>
+              <span class="faq-arrow-down text-imole-gold font-mono">&darr;</span>
+              <span class="faq-arrow-up hidden text-imole-gold font-mono">&uarr;</span>
+            </button>
+            <div class="hidden p-5 border-t border-slate-850/60 bg-slate-950/40 text-xs text-slate-300 leading-relaxed">
+              Absolument. Nos forfaits SLA sont sans engagement de durée obligatoire à long terme. Vous pouvez faire évoluer votre niveau d'astreinte ou suspendre votre contrat de maintenance d'un mois sur l'autre, sur simple notification auprès de votre chargée de compte.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- MULTI-STEP QUOTE & CONTACT FORM --- -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-slate-950/40 relative z-10 border-t border-slate-900">
+      <div class="max-w-4xl mx-auto space-y-12">
+        <div class="text-center space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-imole-gold font-mono">Formulaire de Contact</h2>
+          <h3 class="text-3xl font-extrabold text-white tracking-tight">Dites-nous en plus sur votre projet</h3>
+          <p class="text-xs sm:text-sm text-slate-400 max-w-sm mx-auto leading-relaxed">
+            Remplissez notre formulaire guidé étape par étape pour que nos experts préparent au mieux notre premier échange.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/40 border border-slate-850 rounded-3xl overflow-hidden shadow-2xl relative">
+          <!-- Step dots indicators header -->
+          <div class="bg-slate-950/80 p-5 border-b border-slate-850/60 flex items-center justify-between">
+            <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 font-mono">Cotonou Project Dispatcher</span>
+            <div class="flex space-x-2">
+              <span class="step-dot h-2 w-2 rounded-full bg-imole-gold transition-colors"></span>
+              <span class="step-dot h-2 w-2 rounded-full bg-slate-850 transition-colors"></span>
+              <span class="step-dot h-2 w-2 rounded-full bg-slate-850 transition-colors"></span>
+            </div>
+          </div>
+
+          <!-- Preload Alert indicator if pricing is loaded -->
+          <div id="calculator-preload-alert" class="hidden bg-amber-500/10 border-b border-amber-500/20 px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+              <svg class="w-4 h-4 text-imole-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+              <p class="text-[10px] sm:text-xs text-slate-200 font-medium">
+                Estimation du simulateur chargée (<span id="preselected-price-span" class="font-bold text-imole-gold"></span>)
+              </p>
+            </div>
+            <button id="clear-preload-btn" class="text-[10px] text-slate-400 hover:text-white font-bold cursor-pointer underline">Réinitialiser</button>
+          </div>
+
+          <!-- Actual Form -->
+          <form id="main-contact-form" class="p-6 sm:p-8 space-y-8">
+            
+            <!-- PANEL STEP 1: Services Selection -->
+            <div data-step="1" class="form-step-panel space-y-6">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white">Étape 1 : Services d'intérêt</h4>
+                <p class="text-[11px] text-slate-400">Quels sont les domaines d'intervention qui correspondent à vos besoins ?</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <label class="form-service-label border border-slate-850 hover:border-slate-700 bg-slate-950 p-4 rounded-2xl cursor-pointer flex flex-col justify-between h-28 select-none">
+                  <span class="text-xs font-bold text-white leading-tight">Communication & Présence Digitale</span>
+                  <input type="checkbox" value="communication-visibilite" class="form-service-checkbox self-end h-4 w-4 rounded text-imole-gold focus:ring-0" />
+                </label>
+                <label class="form-service-label border border-slate-850 hover:border-slate-700 bg-slate-950 p-4 rounded-2xl cursor-pointer flex flex-col justify-between h-28 select-none">
+                  <span class="text-xs font-bold text-white leading-tight">Cybersécurité & Audits Informatiques</span>
+                  <input type="checkbox" value="cybersecurite" class="form-service-checkbox self-end h-4 w-4 rounded text-imole-gold focus:ring-0" />
+                </label>
+                <label class="form-service-label border border-slate-850 hover:border-slate-700 bg-slate-950 p-4 rounded-2xl cursor-pointer flex flex-col justify-between h-28 select-none">
+                  <span class="text-xs font-bold text-white leading-tight">Conseil & Business Plans</span>
+                  <input type="checkbox" value="developpement-entreprise" class="form-service-checkbox self-end h-4 w-4 rounded text-imole-gold focus:ring-0" />
+                </label>
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">Détails ou Projet spécial</label>
+                <textarea id="form-message" rows="3" placeholder="Décrivez succinctement votre besoin ou votre projet..." class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl p-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold"></textarea>
+              </div>
+            </div>
+
+            <!-- PANEL STEP 2: Budget & Timeline -->
+            <div data-step="2" class="form-step-panel hidden space-y-6">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white">Étape 2 : Budget & Délais</h4>
+                <p class="text-[11px] text-slate-400">Définissez vos enveloppes prévisionnelles et vos dates cibles.</p>
+              </div>
+
+              <!-- Budget Options buttons -->
+              <div class="space-y-3">
+                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono block">Enveloppe Budgétaire globale</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <button type="button" data-budget="less-20k" class="budget-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    &lt; 20k FCFA
+                  </button>
+                  <button type="button" data-budget="20k-50k" class="budget-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    20k à 50k FCFA
+                  </button>
+                  <button type="button" data-budget="50k-80k" class="budget-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    50k à 80k FCFA
+                  </button>
+                  <button type="button" data-budget="more-80k" class="budget-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    80k FCFA et +
+                  </button>
+                </div>
+              </div>
+
+              <!-- Timeline Options buttons -->
+              <div class="space-y-3">
+                <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono block">Délai de livraison souhaité</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <button type="button" data-timeline="urgent" class="timeline-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    Urgent (&lt; 2 sem)
+                  </button>
+                  <button type="button" data-timeline="1-3months" class="timeline-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    1 à 4 semaines
+                  </button>
+                  <button type="button" data-timeline="3-6months" class="timeline-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    1 à 2 mois
+                  </button>
+                  <button type="button" data-timeline="flexible" class="timeline-option-btn text-xs font-bold p-3 border rounded-2xl transition-all cursor-pointer">
+                    Flexible
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL STEP 3: Contact Details -->
+            <div data-step="3" class="form-step-panel hidden space-y-6">
+              <div class="space-y-1">
+                <h4 class="text-sm font-bold text-white">Étape 3 : Vos Coordonnées</h4>
+                <p class="text-[11px] text-slate-400">Comment pouvons-nous vous recontacter d'ici les prochaines 24 heures ?</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">Nom Complet *</label>
+                  <input required type="text" placeholder="Ex: Jean Houndegla" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">Adresse Email *</label>
+                  <input required type="email" placeholder="Ex: contact@monentreprise.com" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">Téléphone *</label>
+                  <input required type="tel" placeholder="Ex: +229 90 00 00 00" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">Nom de l'entreprise</label>
+                  <input type="text" placeholder="Optionnel" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation actions footer inside form -->
+            <div class="flex justify-between items-center pt-4 border-t border-slate-850/60">
+              <button id="prev-step-btn" type="button" class="invisible bg-slate-950 hover:bg-slate-900 border border-slate-850 hover:border-slate-700 text-slate-300 font-bold text-xs py-2.5 px-6 rounded-xl transition-all cursor-pointer shadow-inner">
+                &larr; Précédent
+              </button>
+              
+              <button id="next-step-btn" type="button" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition-all cursor-pointer shadow-md">
+                Suivant &rarr;
+              </button>
+              
+              <button id="submit-form-btn" type="submit" class="hidden bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-black text-xs py-2.5 px-6 rounded-xl transition-all cursor-pointer shadow-md">
+                Envoyer ma Demande de Devis
+              </button>
+            </div>
+          </form>
+
+          <!-- SUCCESS CARD REPLACEMENT -->
+          <div id="form-success-card" class="hidden p-8 sm:p-12 text-center space-y-6">
+            <div class="h-16 w-16 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-emerald-400 shadow-inner">
+              <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-2xl font-black text-white">Demande de Devis Reçue !</h3>
+              <p class="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
+                Votre dossier a été validé et enregistré par notre dispatch d'ingénieurs à Cotonou. Un de nos architectes solutions vous contactera par email ou téléphone d'ici les prochaines 24 heures ouvrées.
+              </p>
+            </div>
+            <button id="reset-form-btn" class="bg-slate-950 hover:bg-slate-900 border border-slate-850 hover:border-slate-700 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition-all cursor-pointer shadow-inner">
+              Créer une nouvelle demande
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- --- FOOTER --- -->
+    <footer class="bg-slate-950 border-t border-slate-900 text-slate-400 py-16 px-6 md:px-12 relative z-10">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+        
+        <!-- Brand / Identity -->
+        <div class="md:col-span-4 space-y-4">
+          <div class="flex items-center space-x-2.5">
+            <div class="h-8 w-8 rounded-lg bg-imole-gold flex items-center justify-center">
+              <span class="text-slate-950 font-black font-mono text-base">IM</span>
+            </div>
+            <span class="text-base font-extrabold text-white">IMOLÈ</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+            Agence de services d'élite technologique à Cotonou au Bénin. Notre mission est d'accompagner l'innovation ouest-africaine à des prix extrêmement abordables et transparents.
+          </p>
+          <p class="text-[10px] text-slate-600 font-mono">
+            &copy; 2026 IMOLÈ. Tous droits réservés.
+          </p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="md:col-span-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white font-mono mb-4">Navigation</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#accueil" class="hover:text-imole-gold transition-colors">Accueil</a></li>
+            <li><a href="#services" class="hover:text-imole-gold transition-colors">Nos Services</a></li>
+            <li><a href="#configurateur" class="hover:text-imole-gold transition-colors">Configurateur de Prix</a></li>
+            <li><a href="#sla" class="hover:text-imole-gold transition-colors">Maintenance & SLA Tiers</a></li>
+            <li><a href="#propos" class="hover:text-imole-gold transition-colors">À Propos</a></li>
+            <li><a href="#contact" class="hover:text-imole-gold transition-colors">Nous Contacter</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact coordinates -->
+        <div class="md:col-span-4 space-y-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white font-mono">Nous Contacter</h4>
+          <ul class="space-y-3 text-xs text-slate-400">
+            <li class="flex items-start space-x-2.5">
+              <svg class="w-4 h-4 text-imole-gold mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              <span>Avenue Jean-Paul II, en face du Ministère des Affaires Étrangères, Cotonou, Bénin</span>
+            </li>
+            <li class="flex items-center space-x-2.5">
+              <svg class="w-4 h-4 text-imole-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+              <span>+229 90 00 00 00</span>
+            </li>
+            <li class="flex items-center space-x-2.5">
+              <svg class="w-4 h-4 text-imole-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              <span>support@imole.com</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </footer>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
-</body>
+    <!-- --- AUDIT DIALOG MODAL --- -->
+    <div id="audit-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 items-center justify-center p-4">
+      <div class="relative w-full max-w-lg bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+        <!-- Close button header -->
+        <button id="btn-close-global-modal" class="absolute top-4 right-4 bg-slate-950 hover:bg-slate-850 rounded-full p-2 text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Fermer la fenêtre">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+
+        <div id="audit-modal-content" class="p-6 sm:p-8 space-y-6">
+          <div class="flex items-center space-x-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 self-start shadow-sm max-w-max">
+            <svg class="w-3.5 h-3.5 text-imole-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-imole-gold font-mono">Évaluation Technique Gratuite</span>
+          </div>
+
+          <div class="space-y-1">
+            <h3 class="text-xl font-extrabold text-white leading-tight">Demandez votre Audit Gratuit</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Entrez vos coordonnées pour être recontacté sous 24h par un de nos architectes solutions à Cotonou.
+            </p>
+          </div>
+
+          <!-- Audit Form panel -->
+          <form id="audit-form" class="space-y-4 text-left">
+            <div class="space-y-1">
+              <label class="text-[11px] font-bold text-slate-400 block">Nom complet *</label>
+              <input required type="text" placeholder="Ex: Jean Houndegla" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-bold text-slate-400 block">Adresse e-mail *</label>
+              <input required type="email" placeholder="Ex: contact@monentreprise.com" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-bold text-slate-400 block">Numéro de téléphone *</label>
+              <input required type="tel" placeholder="Ex: +229 90 00 00 00" class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold" />
+            </div>
+            <div class="space-y-1">
+              <label class="text-[11px] font-bold text-slate-400 block">Message ou projet</label>
+              <textarea rows="3" placeholder="Dites-nous en quelques mots votre besoin..." class="w-full bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-xl py-2.5 px-3.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-imole-gold"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-black text-xs py-3.5 rounded-xl transition-all cursor-pointer shadow-md">
+              Envoyer ma demande d'audit
+            </button>
+          </form>
+        </div>
+
+        <!-- Success overlay inside audit modal -->
+        <div id="audit-success-content" class="hidden p-8 text-center space-y-4">
+          <div class="h-14 w-14 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-emerald-400">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-white">Demande d'audit reçue !</h3>
+          <p class="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
+            Votre demande d'évaluation technique a bien été transmise à notre équipe d'ingénieurs à Cotonou. Un de nos experts vous recontactera d'ici les prochaines 24 heures ouvrées.
+          </p>
+          <button id="close-success-audit-btn" class="mt-2 bg-slate-950 hover:bg-slate-900 border border-slate-850 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition-all cursor-pointer">
+            Fermer
+          </button>
+        </div>
+
+        <div class="p-4 bg-slate-950/85 border-t border-slate-850/60 text-center">
+          <button id="close-footer-audit-btn" class="text-xs font-bold text-slate-400 hover:text-white cursor-pointer">
+            Fermer la fenêtre
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- --- FLOATING MINI WHATSAPP CHAT WIDGET --- -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <!-- Chat Floating Trigger Button -->
+      <button id="whatsapp-floating-bubble" class="relative bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 cursor-pointer" aria-label="Contacter l'agence sur WhatsApp">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        
+        <!-- Bouncing Badge count -->
+        <span id="whatsapp-unread-badge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold font-mono h-5 w-5 rounded-full items-center justify-center animate-bounce border border-slate-950">
+          0
+        </span>
+        <span class="absolute inset-0 rounded-full bg-emerald-500 opacity-20 animate-ping -z-10"></span>
+      </button>
+    </div>
+
+    <!-- WhatsApp Window Overlay -->
+    <div id="whatsapp-chat-window" class="hidden fixed bottom-24 right-6 w-[360px] sm:w-[400px] h-[520px] bg-slate-950 rounded-3xl shadow-2xl border border-slate-800 flex-col overflow-hidden z-50">
+      <!-- Chat Window Header -->
+      <div class="bg-emerald-600 text-white p-4 flex items-center justify-between shadow-md">
+        <div class="flex items-center space-x-3">
+          <div class="relative">
+            <div class="h-10 w-10 rounded-full bg-emerald-850 border border-emerald-500 flex items-center justify-center font-black text-sm text-white font-mono shadow-inner">
+              IM
+            </div>
+            <span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-emerald-600 animate-pulse"></span>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold tracking-wide">Support IMOLÈ</h4>
+            <p class="text-[10px] text-emerald-100 flex items-center">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse"></span> En ligne (Réponse instantanée)
+            </p>
+          </div>
+        </div>
+        <button id="close-whatsapp-btn" class="text-emerald-100 hover:text-white p-1 rounded-full cursor-pointer" title="Fermer le chat">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <!-- Messages body container -->
+      <div id="whatsapp-messages-body" class="flex-1 overflow-y-auto p-4 bg-[#0a111e] flex flex-col space-y-3">
+        <!-- Messages loaded dynamically via main.js -->
+      </div>
+
+      <!-- Action Chips Row -->
+      <div class="bg-[#09101d] px-3 py-2 border-t border-slate-900 overflow-x-auto whitespace-nowrap flex space-x-2">
+        <button class="whatsapp-quick-chip bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-[10px] font-semibold px-2.5 py-1.5 rounded-full cursor-pointer transition-colors">
+          Quels sont vos tarifs ?
+        </button>
+        <button class="whatsapp-quick-chip bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-[10px] font-semibold px-2.5 py-1.5 rounded-full cursor-pointer transition-colors">
+          Audit de sécurité Express
+        </button>
+        <button class="whatsapp-quick-chip bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-[10px] font-semibold px-2.5 py-1.5 rounded-full cursor-pointer transition-colors">
+          Demander un devis site web
+        </button>
+      </div>
+
+      <!-- Typing simulation item indicators -->
+      <div id="whatsapp-typing-indicator" class="hidden px-4 py-1.5 bg-[#0a111e] flex-col items-start">
+        <span class="text-[10px] font-bold text-emerald-500 font-mono mb-0.5 ml-1"><span id="whatsapp-typing-name"></span> est en train d'écrire...</span>
+        <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-2xl rounded-tl-none flex items-center space-x-1.5 shadow-sm">
+          <span class="h-1 w-1 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0ms;"></span>
+          <span class="h-1 w-1 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 150ms;"></span>
+          <span class="h-1 w-1 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
+        </div>
+      </div>
+
+      <!-- Footer inputs controls -->
+      <div class="bg-slate-950 p-3.5 border-t border-slate-800 flex items-center space-x-2.5">
+        <input id="whatsapp-input-field" type="text" placeholder="Écrivez votre message..." class="flex-1 bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-500/50 rounded-full px-4 py-2 text-xs text-white placeholder-slate-500 shadow-inner" />
+        <button id="whatsapp-send-btn" class="p-2.5 bg-emerald-500 text-white rounded-full cursor-pointer hover:scale-105 transition-all flex items-center justify-center">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Linked script file -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
